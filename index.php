@@ -24,8 +24,12 @@
       <?php 
 		  if($result!==FALSE){
 		     while($row = mysqli_fetch_array($result)) {
+		     	$data = $row["timestamp"];
+                $date = new DateTime($data);
+                $date->add(new DateInterval('PT7H'));
+
 		        printf("<tr><td> &nbsp;%s </td><td> &nbsp;%s&nbsp; </td><td> &nbsp;%s&nbsp; </td></tr>", 
-		           $row["timestamp"], $row["temperature"], $row["humidity"]);
+		           $date->format('Y-m-d H:i:s'), $row["temperature"], $row["humidity"]);
 		     }
 		     mysqli_free_result($result);
 		     
